@@ -1,6 +1,6 @@
 resource "aws_lambda_function" "copy_to_s3" {
   filename          = "lambda_scripts/copy_to_s3.js"
-  role             = "${aws_iam_role.iam_for_lambda.arn}"
+  role             = "${aws_iam_role.iam_for_copy_to_s3_lambda.arn}"
   handler          = "exports.test"
   runtime          = "nodejs8.10"
   function_name    = "copyToS3"
@@ -15,13 +15,12 @@ resource "aws_lambda_function" "copy_to_s3" {
 resource "aws_lambda_function" "load_to_redshift_lambda" {
   s3_bucket         = "awslabs-code-us-east-1"
   s3_key            = "LambdaRedshiftLoader/AWSLambdaRedshiftLoader-2.5.0.zip"
-  role             = "${aws_iam_role.iam_for_lambda.arn}"
+  role             = "${aws_iam_role.iam_for_redshift_lambda.arn}"
   handler          = "exports.test"
   runtime          = "nodejs8.10"
   function_name    = "loadToRedshift"
   environment {
     variables = {
-      foo = "bar"
     }
   }
 }
