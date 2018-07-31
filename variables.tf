@@ -8,3 +8,9 @@ variable "environment" {
   type = "string"
   default = "Dev"
 }
+
+variable "aws_region" {
+  description = "The AWS region you're using."
+  type = "string"
+  default = "eu-west-1"
+}
